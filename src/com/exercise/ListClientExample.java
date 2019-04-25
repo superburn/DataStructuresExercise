@@ -3,6 +3,9 @@ package com.exercise;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Exercise 1
+ */
 public class ListClientExample {
     private List list;
 

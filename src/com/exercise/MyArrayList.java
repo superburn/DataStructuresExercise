@@ -11,8 +11,8 @@ public class MyArrayList<T> implements List<T> {
 
     private T[] array;
 
-    public MyArrayList(){
-        array = (T[])new Object[10];
+    public MyArrayList() {
+        array = (T[]) new Object[10];
         size = 0;
     }
 
@@ -22,7 +22,7 @@ public class MyArrayList<T> implements List<T> {
 //        arrayList.set(0,0);
 //        System.out.println(Arrays.toString(arrayList.toArray()));
         //test add
-        MyArrayList<Integer> list = new MyArrayList();
+        List<Integer> list = new MyArrayList();
         list.add(1);
         list.add(2);
         list.add(3);
@@ -30,7 +30,7 @@ public class MyArrayList<T> implements List<T> {
         list.add(5);
         System.out.println(Arrays.toString(list.toArray()));
         //test add index
-        list.add(2,7);
+        list.add(2, 7);
         System.out.println(Arrays.toString(list.toArray()));
         //test remove
         list.remove(2);
@@ -76,7 +76,7 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public Object[] toArray() {
-        return Arrays.copyOf(array,size);
+        return Arrays.copyOf(array, size);
     }
 
     @Override
@@ -208,8 +208,8 @@ public class MyArrayList<T> implements List<T> {
 
         /******book implementation*****/
         T element = get(index);
-        for (int i=index; i<size-1; i++) {
-            array[i] = array[i+1];
+        for (int i = index; i < size - 1; i++) {
+            array[i] = array[i + 1];
         }
         size--;
         return element;
@@ -237,7 +237,7 @@ public class MyArrayList<T> implements List<T> {
         /**my implementation**/
 
         /***book implement**/
-        for (int i = 0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             if (equals(o, array[i])) {
                 return i;
             }
@@ -266,8 +266,9 @@ public class MyArrayList<T> implements List<T> {
         return null;
     }
 
-    /** Checks whether an element of the array is the target.
-     *
+    /**
+     * Checks whether an element of the array is the target.
+     * <p>
      * Handles the special case that the target is null.
      *
      * @param target

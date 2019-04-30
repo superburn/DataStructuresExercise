@@ -5,3 +5,5 @@
 *.ipr
 
 *.class
+
+/target/

@@ -10,12 +10,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class WikiNodeIterable implements Iterable<Node> {
-    private Deque<Node> stack;
-
     private Node root;
 
     public WikiNodeIterable(Node root){
-        stack = new ArrayDeque();
         this.root = root;
     }
 

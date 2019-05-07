@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class MyBetterMap<K,V> implements Map<K,V> {
-    private List<MyLinearMap<K, V>> maps;
+    protected List<MyLinearMap<K, V>> maps;
 
     public MyBetterMap(){
         makeMaps(2);
@@ -63,7 +63,11 @@ public class MyBetterMap<K,V> implements Map<K,V> {
 
     @Override
     public int size() {
-        return 0;
+        int total = 0;
+        for(MyLinearMap<K,V> map : maps){
+            total += map.size();
+        }
+        return total;
     }
 
     @Override
@@ -83,7 +87,9 @@ public class MyBetterMap<K,V> implements Map<K,V> {
 
     @Override
     public void clear() {
-
+        for (int i = 0; i < maps.size(); i++) {
+            maps.get(i).clear();
+        }
     }
 
     @Override

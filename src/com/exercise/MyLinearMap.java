@@ -101,7 +101,7 @@ public class MyLinearMap<K,V> implements Map<K,V> {
 
     @Override
     public int size() {
-        return 0;
+        return entries.size();
     }
 
     @Override
@@ -147,5 +147,17 @@ public class MyLinearMap<K,V> implements Map<K,V> {
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
         return null;
+    }
+
+    /**
+     * Returns a reference to `entries`.
+     *
+     * This is not part of the Map interface; it is here to provide the functionality
+     * of `entrySet` in a way that is substantially simpler than the "right" way.
+     *
+     * @return
+     */
+    protected Collection<? extends java.util.Map.Entry<K, V>> getEntries() {
+        return entries;
     }
 }

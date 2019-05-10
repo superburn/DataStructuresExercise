@@ -211,7 +211,95 @@ public class MyTreeMap<K, V> implements Map<K, V> {
 
     @Override
     public V remove(Object key) {
+        V oldValue = null;
+        //if root
+        if (equals(key, root.key)) {
+            oldValue = selfBalance(null, key);
+            size--;
+        } else {
+            Node parentNode = findParentNode(key);
+            if (parentNode != null) {
+                oldValue = selfBalance(parentNode, key);
+                size--;
+            }
+        }
+        return oldValue;
+    }
+
+    private Node findParentNode(Object key) {
+        if (key == null) {
+            throw new IllegalArgumentException();
+        }
+
+        Node parentNode = null;
+        Comparable<? super K> comparable = (Comparable<? super K>) key;
+
+        Node node = root;
+        while (node != null) {
+            if (comparable.compareTo(node.key) > 0) {
+                parentNode = node;
+                node = node.right;
+            } else if (comparable.compareTo(node.key) < 0) {
+                parentNode = node;
+                node = node.left;
+            } else {
+                return parentNode;
+            }
+        }
         return null;
+    }
+
+    private V selfBalance(Node parentNode, Object key) {
+        V oldValue = null;
+        Node target = null;
+        Node left = null;
+        Node right = null;
+        //root
+        if (parentNode == null) {
+            oldValue = root.value;
+            left = root.left;
+            right = root.right;
+            if(left == null && right == null){
+                root = null;
+            } else if (right != null) {
+                root = right;
+                if(left != null) {
+                    put(left.key, left.value);
+                }
+            }else if(left != null){
+                root = left;
+                if(right != null){
+                    put(right.key,right.value);
+                }
+            }
+        } else if (parentNode.left != null && equals(key, parentNode.left.key)) { //left subTree
+            target = parentNode.left;
+            oldValue = target.value;
+            left = target.left;
+            right = target.right;
+            if(left == null && right == null){
+                parentNode.left = null;
+            }else if (left != null) {
+                parentNode.left = left;
+                if (right != null) {
+                    left.right = right;
+                }
+            }
+        } else if (parentNode.right != null && equals(key, parentNode.right.key)) { //right subTree
+            target = parentNode.right;
+            oldValue = target.value;
+            left = target.left;
+            right = target.right;
+            if(left == null && right == null){
+                parentNode.right = null;
+            }else if (right != null) {
+                parentNode.right = right;
+                if (left != null) {
+                    right.left = left;
+                }
+            }
+        }
+        return oldValue;
     }
 
     @Override
@@ -278,11 +366,23 @@ public class MyTreeMap<K, V> implements Map<K, V> {
     public static void main(String[] args) {
         Map<Integer, String> map = new MyTreeMap<>();
         map.put(1, "1");
+        map.put(4, "4");
+        map.put(5, "5");
         map.put(2, "2");
-        map.put(2, "3");
-        System.out.println(map.get(2));
-        System.out.println(map.containsKey(3));
-        System.out.println(map.containsValue("3"));
+        map.put(7, "7");
+        map.put(3, "3");
+        map.put(8, "8");
+        map.put(0, "0");
+        map.put(9,"9");
+        map.put(6, "6");
         System.out.println(Arrays.toString(map.keySet().toArray()));
+        map.remove(1);
+        System.out.println(Arrays.toString(map.keySet().toArray()));
+
+        Map<Integer, String> map2 = new MyTreeMap<>();
+        map2.put(1, "1");
+        System.out.println(Arrays.toString(map2.keySet().toArray()));
+        map2.remove(1);
+        System.out.println(Arrays.toString(map2.keySet().toArray()));
     }
 }

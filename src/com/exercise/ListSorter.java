@@ -1,8 +1,10 @@
 package com.exercise;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 /*List sort Exercise*/
@@ -92,5 +94,35 @@ public class ListSorter<T> {
             }
         }
         return list;
+    }
+
+    public List<T> heapSort(List<T> list,Comparator<T> comparator){
+        PriorityQueue<T> heap = new PriorityQueue<>(list.size(),comparator);
+        heap.addAll(list);
+        list.clear();
+        while(!heap.isEmpty()){
+            list.add(heap.poll());
+        }
+        return list;
+    }
+
+    public List<T> topK(int k,List<T> list,Comparator<T> comparator){
+        PriorityQueue<T> heap = new PriorityQueue<>(list.size(),comparator);
+        for(T element : list){
+            if(k < list.size()){
+                heap.offer(element);
+                continue;
+            }
+            int cmp = comparator.compare(element,heap.peek());
+            if(cmp > 0){
+                heap.poll();
+                heap.offer(element);
+            }
+        }
+        List<T> result = new ArrayList<>();
+        if(!heap.isEmpty()){
+            result.add(heap.poll());
+        }
+        return result;
     }
 }

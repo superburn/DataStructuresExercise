@@ -3,6 +3,7 @@ package com.exercise;
 import org.jsoup.nodes.Node;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.Iterator;
@@ -45,7 +46,7 @@ public class WikiNodeIterable implements Iterable<Node> {
             }
 
             Node node = stack.pop();
-            List<Node> children = node.childNodes();
+            List<Node> children = new ArrayList<>(node.childNodes());
             Collections.reverse(children);
             for (Node child : children) {
                 stack.push(child);

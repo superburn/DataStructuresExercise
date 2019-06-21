@@ -88,7 +88,7 @@ public class MyArrayList<T> implements List<T> {
     public boolean add(T t) {
         if (size >= array.length) {
             T[] bigger = (T[]) new Object[array.length * 2];
-            System.arraycopy(array, 0, bigger, 1, array.length);
+            System.arraycopy(array, 0, bigger, 0, array.length);
             array = bigger;
         }
         array[size] = t;

@@ -109,7 +109,7 @@ public class ListSorter<T> {
     public List<T> topK(int k,List<T> list,Comparator<T> comparator){
         PriorityQueue<T> heap = new PriorityQueue<>(list.size(),comparator);
         for(T element : list){
-            if(k < list.size()){
+            if(k > list.size()){
                 heap.offer(element);
                 continue;
             }

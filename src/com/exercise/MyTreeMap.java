@@ -266,7 +266,7 @@ public class MyTreeMap<K, V> implements Map<K, V> {
                 if(left != null) {
                     put(left.key, left.value);
                 }
-            }else if(left != null){
+            } else if(left != null){
                 root = left;
                 if(right != null){
                     put(right.key,right.value);

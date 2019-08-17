@@ -373,7 +373,7 @@ public class MyTreeMap<K, V> implements Map<K, V> {
         map.put(3, "3");
         map.put(8, "8");
         map.put(0, "0");
-        map.put(9,"9");
+        map.put(9, "9");
         map.put(6, "6");
         System.out.println(Arrays.toString(map.keySet().toArray()));
         map.remove(1);
